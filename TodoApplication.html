@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="TodoApplication.css" />
+    <link
+      rel="stylesheet"
+      href="/node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script defer src="TodoApplication.js"></script>
+  </head>
+  <body>
+    <div class="todos-bg-container">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <h1 class="todos-heading">Todos</h1>
+            <h1 class="create-task-heading">
+              Create <span class="create-task-heading-subpart">Task</span>
+            </h1>
+            <input
+              type="text"
+              id="todoUserInput"
+              class="todo-user-input"
+              placeholder="Enter your task"
+            />
+            <button class="todo-add-button" id="todoAddButton">Add</button>
+            <h1 class="my-task-heading">
+              My <span class="my-task-heading-subpart">Tasks</span>
+            </h1>
+            <ul class="todo-items-container" id="todoItemsContainer"></ul>
+            <button class="save-button" id="saveButton">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
