@@ -18,15 +18,24 @@ saveButtonElem.onclick = function () {
   localStorage.setItem("todoList", JSON.stringify(todoList));
 };
 
-function todoItemStatusChanged(checkboxId, labelId) {
+function todoItemStatusChanged(checkboxId, labelId, todoId) {
   const checkboxElem = document.getElementById(checkboxId);
   const labelElem = document.getElementById(labelId);
-  // if (checkboxElem.checked === true) {
-  //   labelElem.classList.add("checked");
-  // } else {
-  //   labelElem.classList.remove("checked");
-  // }
   labelElem.classList.toggle("checked");
+  let todoObjectIndex = todoList.findIndex(function (eachToDo) {
+    let todoItemId = "todo" + eachToDo.uniqueNo;
+    if (todoItemId === todoId) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  let todoObject = todoList[todoObjectIndex];
+  if (todoObject.checkedStatus === true) {
+    todoObject.checkedStatus = false;
+  } else {
+    todoObject.checkedStatus = true;
+  }
 }
 
 function onDeleteToDo(todoId) {
@@ -55,8 +64,9 @@ function createTodoItem(todo) {
   checkboxElem.type = "checkbox";
   checkboxElem.classList.add("checkbox-input");
   checkboxElem.id = checkboxId;
+  checkboxElem.checked = todo.checkedStatus;
   checkboxElem.onclick = function () {
-    todoItemStatusChanged(checkboxId, labelId);
+    todoItemStatusChanged(checkboxId, labelId, todoId);
   };
   itemElem.appendChild(checkboxElem);
   const todoLabelContainerElem = document.createElement("div");
@@ -71,6 +81,9 @@ function createTodoItem(todo) {
   todoLabelElem.id = labelId;
   todoLabelElem.classList.add("label-input");
   todoLabelElem.textContent = todo.text;
+  if (checkboxElem.checked === true) {
+    todoLabelElem.classList.add("checked");
+  }
   todoLabelContainerElem.appendChild(todoLabelElem);
   const deleteIconcontainerElem = document.createElement("div");
   deleteIconcontainerElem.classList.add("delete-icon-container");
@@ -102,6 +115,7 @@ function onAddToDo() {
   let newToDo = {
     text: userInputValue,
     uniqueNo: toDoCount,
+    checkedStatus: false,
   };
   todoList.push(newToDo);
   createTodoItem(newToDo);
